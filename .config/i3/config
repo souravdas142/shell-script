@@ -19,12 +19,13 @@ exec --no-startup-id numlockx on
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec_always --no-startup-id nm-applet --sm-disable
-exec_always --no-startup-id gpaste-client start
 exec --no-startup-id picom
 #exec --no-startup-id copyq
 #exec --no-startup-id quiterss
-exec --no-startup-id persepolis --tray
+#exec --no-startup-id persepolis --tray
 exec --no-startup-id dunst
+exec --no-startup-id gpaste-client start
+exec --no-startup-id xdman &
 #
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -44,7 +45,6 @@ set $urgent-bg-color     #E53935
 #end of color variable
 
 set $mod Mod4
-set $refresh_i3status killall -SIGUSR1 i3status
 # Set program location
 set $alacritty_colorscheme ~/.local/bin/alacritty-colorscheme
 
@@ -251,6 +251,13 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 && DunstifyVolLight brightnessInc 
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 && DunstifyVolLight brightnessDec
 
+
+# Clipboard Start up
+bindsym $mod+Shift+p exec --no-startup-id gpaste-client ui
+
+
+
+
 #screenshot bindigs
 # imgToClip alias to xclip -selection clipboard image/png -i
 
@@ -266,12 +273,9 @@ tee ~/Pictures/Screenshot/Screenshot-$(date '+%m%d%y-%H%M%S').png | xclip -selec
 bindsym $mod+Shift+Print --release exec --no-startup-id "flameshot full --clipboard --path \
 ~/Pictures/Screenshot/ && flameshot config -t false"
 
-bindsym $mod+Control+Print --release exec --no-startup-id shutter -f -c -e -n  -o \
-'~/Pictures/Screenshot/Screenshot-%m%d%y-%T.png'
-
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur --off 15
 
-bindsym Control+Mod1+g exec --no-startup-id gpaste-client ui
+
 
 ################################### END OF ALL KEYBOARD BINDIGS ####################################
 
